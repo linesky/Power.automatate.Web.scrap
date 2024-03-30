@@ -1,9 +1,5 @@
-# Power.automatate.Web.scrap
-Web scrapt a web site
+# http.remote.control
 
-you must put this files inside 
-my folder/  applications / power automatetion deskto
-
-put the 2 keys inside dir
+remote control by http
 
 
