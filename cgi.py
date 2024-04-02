@@ -7,7 +7,7 @@ command="/usr/bin/tcc -run ./cgi-bin/table.c"
 class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         command=str(self.path)
-     
+        result=""
         try:
             scn=command.split("/cgi-bin/")
             lscn=len(scn)
@@ -44,11 +44,20 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
                     result = subprocess.check_output(command, stderr=subprocess.STDOUT, shell=True, text=True)
                 else:
                     result="error\n"
-                self.send_response(200)
-                self.send_header("Content-type",'text/html' )
-                self.end_headers()
-                bs=(result).encode("utf-8")
-                self.wfile.write(bs)
+            else:
+                if command=="/":
+                    command="."+command+"index.html"
+                else:
+                    command="."+command
+                f1=open(command)
+                result=f1.read()
+                f1.close()    
+                
+            self.send_response(200)
+            self.send_header("Content-type",'text/html' )
+            self.end_headers()
+            bs=(result).encode("utf-8")
+            self.wfile.write(bs)
             
         except subprocess.CalledProcessError as e:
             if 0==0:
