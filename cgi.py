@@ -9,9 +9,14 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
         command=str(self.path)
         result=""
         try:
+            
             scn=command.split("/cgi-bin/")
             lscn=len(scn)
-            if lscn>1:
+            sscn=command.find(".elf")
+            
+            if sscn>-1:
+                result = subprocess.check_output("."+command, stderr=subprocess.STDOUT, shell=True, text=True)
+            elif lscn>1:
                 cnd3=scn[1].split("?")
                 lcnd3=len(cnd3)
                 command="./cgi-bin/"+cnd3[0]
