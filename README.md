@@ -1,5 +1,5 @@
-# http.remote.control
+# windows.bash.shell
 
-remote control by http
+easy bash shell to windows
 
 
